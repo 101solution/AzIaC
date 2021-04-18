@@ -40,13 +40,13 @@ jobs:
           # Provide the name of a resource group, only required for resource Group deployments.
           resourceGroupName: '101S-Azure-IAC-DEV'
           # Specify the path or URL to the Azure Resource Manager template.
-          template: 'dev-environment\src\dev-vm.azdeploy.json'
+          template: '${{GITHUB_WORKSPACE}}\dev-environment\src\dev-vm.azdeploy.json'
           # Incremental (only add resources to resource group) or Complete (remove extra resources from       resource group) or Validate (only validates the template).
           deploymentMode: "Validate"
           # Specifies the name of the resource group deployment to create.
           deploymentName: "dev-vm"
           # Supply deployment parameter values.
-          parameters: 'dev-environment\src\dev.azdeploy.parameters.json.json'
+          parameters: '${{GITHUB_WORKSPACE}}\dev-environment\src\dev.azdeploy.parameters.json.json'
       - name: ARM Deploy
         uses: Azure/arm-deploy@v1
         with:
@@ -57,10 +57,10 @@ jobs:
           # Provide the name of a resource group, only required for resource Group deployments.
           resourceGroupName: '101s-AZIAC-ASE-DEV-01'
           # Specify the path or URL to the Azure Resource Manager template.
-          template: 'dev-environment\src\dev-vm.azdeploy.json'
+          template: '${{GITHUB_WORKSPACE}}\dev-environment\src\dev-vm.azdeploy.json'
           # Incremental (only add resources to resource group) or Complete (remove extra resources from       resource group) or Validate (only validates the template).
           deploymentMode: "Incremental"
           # Specifies the name of the resource group deployment to create.
           deploymentName: "dev-vm"
           # Supply deployment parameter values.
-          parameters: 'dev-environment\src\dev.azdeploy.parameters.json.json'
+          parameters: '${{GITHUB_WORKSPACE}}\dev-environment\src\dev.azdeploy.parameters.json.json'
