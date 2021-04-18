@@ -38,7 +38,7 @@ jobs:
           # Override the Subscription Id set by Azure Login.
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           # Provide the name of a resource group, only required for resource Group deployments.
-          resourceGroupName: '101S-Azure-IAC-DEV'
+          resourceGroupName: '101S-AzIAC-Dev'
           # Specify the path or URL to the Azure Resource Manager template.
           template: './dev-environment/src/dev-vm.azdeploy.json'
           # Incremental (only add resources to resource group) or Complete (remove extra resources from       resource group) or Validate (only validates the template).
@@ -55,7 +55,7 @@ jobs:
           # Override the Subscription Id set by Azure Login.
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           # Provide the name of a resource group, only required for resource Group deployments.
-          resourceGroupName: '101s-AZIAC-ASE-DEV-01'
+          resourceGroupName: '101S-AzIAC-Dev'
           # Specify the path or URL to the Azure Resource Manager template.
           template: './dev-environment/src/dev-vm.azdeploy.json'
           # Incremental (only add resources to resource group) or Complete (remove extra resources from       resource group) or Validate (only validates the template).
