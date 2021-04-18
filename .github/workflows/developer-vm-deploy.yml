@@ -28,7 +28,6 @@ jobs:
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          environment: developer
       # Runs a single command using the runners shell
       - name: ARM Validate
         uses: Azure/arm-deploy@v1
