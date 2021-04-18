@@ -11,11 +11,16 @@
     "adminUsername": {
       "value": "csadmin"
     },
-    "adminPassword": {
-      "value": ""
-    },
     "rdpPort": {
       "value": 80
+    },
+    "adminPassword":{
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/5f5b17bf-ffa2-4216-8f11-d1609a76acc5/resourceGroups/101S-Azure-IAC-Core/providers/Microsoft.KeyVault/vaults/o0o-aziac-key-dev"
+        },
+        "secretName": "vm-admin-password"
+      }
     }
   }
 }
