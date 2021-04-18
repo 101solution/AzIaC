@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: developer-vm-deploy
 
 # Controls when the action will run. 
 on:
@@ -25,16 +25,36 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       # Runs a single command using the runners shell
-      - name: Deploy Azure Resource Manager (ARM) Template
+      - name: ARM Validate
         uses: Azure/arm-deploy@v1
         with:
           # Provide the scope of the deployment. Valid values are: 'resourcegroup', 'managementgroup',      'subscription'
           scope: 'resourcegroup'
           # Override the Subscription Id set by Azure Login.
-          subscriptionId: # optional
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
           # Provide the name of a resource group, only required for resource Group deployments.
-          resourceGroupName: # optional
+          resourceGroupName: '101s-AZIAC-ASE-DEV-01'
+          # Specify the path or URL to the Azure Resource Manager template.
+          template: 'dev-environment\src\dev-vm.azdeploy.json'
+          # Incremental (only add resources to resource group) or Complete (remove extra resources from       resource group) or Validate (only validates the template).
+          deploymentMode: "Validate"
+          # Specifies the name of the resource group deployment to create.
+          deploymentName: "dev-vm"
+          # Supply deployment parameter values.
+          parameters: 'dev-environment\src\dev.azdeploy.parameters.json.json'
+      - name: ARM Deploy
+        uses: Azure/arm-deploy@v1
+        with:
+          # Provide the scope of the deployment. Valid values are: 'resourcegroup', 'managementgroup',      'subscription'
+          scope: 'resourcegroup'
+          # Override the Subscription Id set by Azure Login.
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          # Provide the name of a resource group, only required for resource Group deployments.
+          resourceGroupName: '101s-AZIAC-ASE-DEV-01'
           # Specify the path or URL to the Azure Resource Manager template.
           template: 'dev-environment\src\dev-vm.azdeploy.json'
           # Incremental (only add resources to resource group) or Complete (remove extra resources from       resource group) or Validate (only validates the template).
